@@ -1,0 +1,149 @@
+---
+title: "day1"
+author: "Catastrophist"
+date: "2022/1/6"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+cache = TRUE
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars, cache = TRUE}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, cache = TRUE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+----
+```{r, cache = TRUE}
+library(tidyverse)
+library(ggplot2)
+#>Loading ggplot2 tibble readr purrr dplyr
+
+
+```
+
+Loading some function without loading package:
+
+**package::function()**
+
+To get function's help, select on function and press **F1**
+
+Sample:
+```{r, cache = TRUE}
+ggplot2::ggplot()
+```
+
+---
+
+### 汽车引擎大小与耗油量的关系
+```{r}
+ggplot2::mpg
+
+#?ggplot2::mpg 在新窗口查看更多信息
+```
+
+#### 创建ggplot图形
+
+```{r}
+library(ggplot2)
+ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy))#+geom_line(mapping = aes(x = displ, y = hwy))
+```
+
+
+* **attention**: 
++ **ggplot()** creates a blackboard
++ **geom_point()** creates a point mapping
++ the first parameter in **ggplot()**: **data=mpg** is to determine the dataset to be used in the graph
+
+>ggplot2 中的每个几何对象函数都有一个 mapping 参数。这个参数定义了如何将数据集中的
+变量映射为图形属性。mapping 参数总是与 aes() 函数成对出现，aes() 函数的 x 参数和 y
+参数分别指定了映射到 x 轴的变量与映射到 y 轴的变量。ggplot2 在 data 参数中寻找映射量，本例 data就是 mpg
+
+#### 绘图模板
+
+>ggplot(data = \<DATA\>) +
+ \<GEOM_FUNCTION\>(mapping = aes(\<MAPPINGS\>))
+
+#### 练习
+
+```{r}
+library(ggplot2)
+ggplot(data = mpg)
+
+nrow(mpg)
+ncol(mpg)
+colnames(mpg)
+#rownames(mpg)
+ggplot(data = mpg) + geom_point(mapping = aes(x = cyl, y = hwy))
+ggplot(data = mpg) + geom_point(mapping = aes(x = class, y = drv))
+```
+
+### 图形属性映射
+
+>图片的最大价值在于促使我们发现从未预料到的事情。                   ——John Tukey
+
+**向二维散点图添加第三个变量**: *class*，方式是将它映射为**图形属性**，如数据点的大小、形状、颜色。
+
+```{r}
+ggplot(data=mpg)+geom_point(mapping=aes(x = displ, y = hwy, color =class))
+```
+
+要是用图形属性，就要在函数aes()中将属性与变量名称关联，称为**标度变换**
+
+若将class映射为大小，会收到警告：无序变量(class)(\<char\>)映射到有序图形属性(size\<float\>)
+
+
+```{r}
+ggplot(data = mpg) +
+ geom_point(mapping = aes(x = displ, y = hwy, size = class))
+#> Warning: Using size for a discrete variable is not advised
+ggplot(data = mpg) +
+ geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+ggplot(data = mpg) +
+ geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+```
+
+* **Attention**
++ ggplot2 只能同时使用 6 种形状，多出的变量值将不会出现在图中。
+
++ggplot2 不会为 x 和y这两个图形属性创建图例，而会创建带有刻度标记和标签的坐标轴。坐标轴就相当于图例，可以体现出位置和变量值之间的映射关系。
+
+
+
+***
+
+##### 手动设置图形属性
+
+
+```{r}
+library(ggplot2)
+ggplot(data = mpg) +
+ geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+
+
+
+
+
+
+
+
+
