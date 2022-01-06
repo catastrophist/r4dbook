@@ -105,7 +105,7 @@ ggplot(data = mpg) + geom_point(mapping = aes(x = class, y = drv))
 ggplot(data=mpg)+geom_point(mapping=aes(x = displ, y = hwy, color =class))
 ```
 
-要是用图形属性，就要在函数aes()中将属性与变量名称关联，称为**标度变换**
+要使用图形属性，就要在函数aes()中将属性与变量名称关联，称为**标度变换**
 
 若将class映射为大小，会收到警告：无序变量(class)(\<char\>)映射到有序图形属性(size\<float\>)
 
@@ -138,10 +138,99 @@ library(ggplot2)
 ggplot(data = mpg) +
  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
-asdasd
+
+wait to be filled...
+
+***
+#### 练习
+```{r}
+library(ggplot2)
+ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, color = "blue")) 
+
+ ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy)
+ )
+ 
+  ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy,asdasdkaslcknasc='blue')
+ )
+  
+#Warning: Ignoring unknown aesthetics: ppasdasdasdasd
+  
+  ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size='blue')
+ )
+#Warning: Using size for a discrete variable is not advised.  
+      ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class)
+ )
+
+    ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=1)
+ )
+  
+    
+      ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color='a')
+ )
+  
+ #           ggplot(data = mpg) +
+# geom_point(
+# mapping = aes(x = displ, y = hwy, size=class,color=c('aasscasc','sdsd','sdsdsds','sdadsadsc','asdasdasdassc') ))
+          #Error: Aesthetics must be either length 1 or the same as the data (234): colour
+
+            
+      ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=99999)
+ )
+      
+      
+            ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=TRUE)
+ )
+            
+            
+                        ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=FALSE)
+ )
+```
 
 
+> 此时将color放在aes内，相当于一个映射，将color属性为真的值映射到蓝色，但是数据库里并没有color列，也就不存在blue真值，因此无蓝色。可以注意到这里右边出现了一列图例，图例自动根据分类生成，而上图蓝色并无图例，改变的是图本身的值。那么为什么不是黑色的
 
+```{r}
+library(ggplot2)
+
+      ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=99999)
+ )
+            ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=TRUE)
+ )
+            
+                        ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=year)
+ )      
+                        
+                                                ggplot(data = mpg) +
+ geom_point(
+ mapping = aes(x = displ, y = hwy, size=class,color=year),color='#CCFFCC'
+ )      
+```
 
 
 
